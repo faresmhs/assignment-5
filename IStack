@@ -1,0 +1,72 @@
+package com.company;
+package eg.edu.alexu.csd.datastructure.stack.cs50;
+public class DStack {
+    int cap = 2 ;
+    Object stack[] = new Object[cap];
+    int top = 0 ;
+    public void push(Object element){
+        if (size()==cap){
+            expand();
+        }
+        stack[top] = element ;
+        top ++ ;
+    }
+    public void expand(){
+        int length  = size();
+        Object newStack[] = new Object[cap*2];
+        System.arraycopy(stack,0,newStack,0,length);
+        cap = cap * 2 ;
+        stack = newStack ;
+    }
+    public int size(){
+        return top ;
+    }
+    public Object peek(){
+        Object value ;
+        value = stack[top-1];
+        return value ;
+    }
+    public Object pop(){
+        Object value = 0 ;
+        if (isEmpty()){
+            System.out.println("stack is empty");
+        }
+        else{
+            top -- ;
+            value = stack[top];
+            stack[top]=0;
+            thrink();
+        }
+        return value ;
+    }
+    public void thrink(){
+        int length = size();
+        if (length<=(cap/2)/2){
+            cap = cap/2 ;
+        }
+        Object newStack[] = new Object[cap];
+        System.arraycopy(stack,0,newStack,0,length);
+        stack = newStack ;
+    }
+    public boolean isEmpty(){
+        if (size()==0){
+            return true ;
+        }
+        else {
+            return false ;
+        }
+    }
+    public void show(){
+        for (int i=0;i<size();i++){
+            System.out.println(stack[i]);
+        }
+    }
+
+}
+ interface IStack {
+    public Object pop();
+    public Object peek();
+    public void push(Object element);
+    public boolean isEmpty();
+    public int size();
+}
